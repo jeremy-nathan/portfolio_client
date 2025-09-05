@@ -1,12 +1,11 @@
-<template>
+<template v-if="user">
   <div class="grid grid-cols-1 md:grid-cols-4 gap-8 items-center">
     <!-- Left Column (3/4 width on medium screens and up) -->
     <div class="md:col-span-3">
-      <h1 class="text-4xl md:text-5xl font-bold mb-4">Jeremy Nathan</h1>
-      <p class="text-gray-500 text-xl mb-4">Full-Stack Software Engineer</p>
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">{{ user.name }}</h1>
+      <p class="text-gray-500 text-xl mb-4">{{ user.job }}</p>
       <p class="text-gray-700 mb-4">
-        Passionate about creating elegant solutions to complex problems through clean, efficient
-        code.
+        {{ user.description }}
       </p>
       <a
         href="tel:+60199700375"
@@ -27,7 +26,7 @@
               d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"
             />
           </svg> </span
-        >+60 19 970 0375
+        >{{ user.contact?.phone }}
       </a>
     </div>
 
@@ -36,7 +35,7 @@
       <!-- Avatar -->
       <div class="w-32 h-32 md:w-32 md:h-32 rounded-full overflow-hidden border-2 border-gray-200">
         <img
-          src="/avatar.jpeg"
+          :src="getImageUrl(user.image)"
           alt="Jeremy Nathan"
           class="w-full h-full object-cover"
           style="transform: scale(3); transform-origin: top; object-position: 50% 50%"
@@ -47,7 +46,37 @@
 </template>
 
 <script>
+import strapiService from '@/services/strapi'
+
 export default {
   name: 'Title',
+  data() {
+    return {
+      user: {},
+      loading: true,
+      error: null,
+    }
+  },
+
+  methods: {
+    async fetchUserData() {
+      try {
+        this.loading = true
+        const response = await strapiService.getMe()
+        return response.data
+      } catch (error) {
+        this.error = error
+      } finally {
+        this.loading = false
+      }
+    },
+    getImageUrl(media) {
+      return strapiService.getMediaUrl(media)
+    },
+  },
+
+  async mounted() {
+    this.user = await this.fetchUserData()
+  },
 }
 </script>
