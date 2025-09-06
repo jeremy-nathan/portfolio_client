@@ -27,7 +27,7 @@
             </div>
           </div>
           <div class="text-sm text-muted-foreground whitespace-nowrap">
-            {{ item.date }}
+            {{ item.duration }}
           </div>
         </div>
       </div>
@@ -36,45 +36,32 @@
 </template>
 
 <script>
+import strapiService from '@/services/strapi'
+
 export default {
   name: 'Timeline',
   data() {
     return {
-      items: [
-        {
-          title: 'Senior Software Engineer',
-          company: 'MoneyMatch Sdn Bhd, Malaysia',
-          date: '2021 - Present',
-          description:
-            'Leading a team of developers to build scalable web applications using modern technologies. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.',
-          tags: [
-            'PHP',
-            'Laravel',
-            'MySQL',
-            'Node.js',
-            'TypeScript',
-            'AWS',
-            'Git',
-            'Docker',
-            'Jira',
-            'Trello',
-            'DynamoDB',
-            'Lambda',
-            'System Design',
-            'Code Review',
-            'Code Refactoring',
-            'SQL Optimization',
-          ],
-        },
-        {
-          title: 'Customer Assistant',
-          company: 'Watsons Malaysua',
-          date: '2017 - 2017',
-          description: 'Bootlick customer unnecessarily but end up getting scolding from them',
-          tags: ['Customer Experience'],
-        },
-      ],
+      items: [],
     }
+  },
+
+  methods: {
+    async fetchJobsData() {
+      try {
+        this.loading = true
+        const response = await strapiService.getJobs()
+        return response.data
+      } catch (error) {
+        this.error = error
+      } finally {
+        this.loading = false
+      }
+    },
+  },
+
+  async mounted() {
+    this.items = await this.fetchJobsData()
   },
 }
 </script>
