@@ -7,27 +7,51 @@
       <p class="text-gray-700 mb-4">
         {{ user.description }}
       </p>
-      <a
-        href="tel:+60199700375"
-        class="text-gray-600 hover:text-gray-800 hover:underline transition-colors duration-200 inline-flex items-center"
-      >
-        <span class="mr-0.5">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="size-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"
-            />
-          </svg> </span
-        >{{ user.contact?.phone }}
-      </a>
+      <div class="flex flex-col space-y-3">
+        <a
+          href="tel:+60199700375"
+          class="text-gray-600 hover:text-gray-800 hover:underline transition-colors duration-200 inline-flex items-center"
+        >
+          <span class="mr-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              class="size-5"
+            >
+              <path
+                d="M8 16.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"
+              />
+              <path
+                fill-rule="evenodd"
+                d="M4 4a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V4Zm4-1.5v.75c0 .414.336.75.75.75h2.5a.75.75 0 0 0 .75-.75V2.5h1A1.5 1.5 0 0 1 14.5 4v12a1.5 1.5 0 0 1-1.5 1.5H7A1.5 1.5 0 0 1 5.5 16V4A1.5 1.5 0 0 1 7 2.5h1Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </span>
+          {{ user.contact?.phone }}
+        </a>
+        <a
+          href="mailto:jeremy.nathan1@gmail.com"
+          class="text-gray-600 hover:text-gray-800 hover:underline transition-colors duration-200 inline-flex items-center"
+        >
+          <span class="mr-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              class="size-5"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M5.404 14.596A6.5 6.5 0 1 1 16.5 10a1.25 1.25 0 0 1-2.5 0 4 4 0 1 0-.571 2.06A2.75 2.75 0 0 0 18 10a8 8 0 1 0-2.343 5.657.75.75 0 0 0-1.06-1.06 6.5 6.5 0 0 1-9.193 0ZM10 7.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </span>
+          {{ user.contact?.email }}
+        </a>
+      </div>
     </div>
 
     <!-- Right Column (1/4 width on medium screens and up) -->
